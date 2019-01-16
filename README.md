@@ -1,16 +1,16 @@
-# testcafe-reporter-y
-[![Build Status](https://travis-ci.org/redfox256/testcafe-reporter-y.svg)](https://travis-ci.org/redfox256/testcafe-reporter-y)
+# testcafe-reporter-reportportal
+[![Build Status](https://travis-ci.org/redfox256/testcafe-reporter-reportportal.svg)](https://travis-ci.org/redfox256/testcafe-reporter-reportportal)
 
-This is the **y** reporter plugin for [TestCafe](http://devexpress.github.io/testcafe).
+This is the **reportportal** reporter plugin for [TestCafe](http://devexpress.github.io/testcafe).
 
 <p align="center">
-    <img src="https://raw.github.com/redfox256/testcafe-reporter-y/master/media/preview.png" alt="preview" />
+    <img src="https://raw.github.com/redfox256/testcafe-reporter-reportportal/master/media/preview.png" alt="preview" />
 </p>
 
 ## Install
 
 ```
-npm install testcafe-reporter-y
+npm install testcafe-reporter-reportportal
 ```
 
 ## Usage
@@ -29,9 +29,6 @@ testCafe
     .createRunner()
     .src('path/to/test/file.js')
     .browsers('chrome')
-    .reporter('report-portal') // <-
+    .reporter('reportportal') // <-
     .run();
 ```
-
-## Author
-Darryn 
