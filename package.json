@@ -1,0 +1,41 @@
+{
+  "name": "testcafe-reporter-reportportal",
+  "version": "1.0.0",
+  "description": "TestCafe reporter plugin for reportportal.io",
+  "repository": "https://github.com/redfox256/testcafe-reporter-reportportal",
+  "author": {
+    "name": "Darryn",
+    "email": "redfox256@gmail.com"
+  },
+  "main": "lib/index",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "gulp test",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard"
+  },
+  "keywords": [
+    "testcafe",
+    "reporter",
+    "plugin"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^4.0.10",
+    "callsite-record": "^3.2.0",
+    "del": "^1.2.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.1.1",
+    "gulp-mocha": "^2.2.0",
+    "normalize-newline": "^1.0.2",
+    "publish-please": "^2.1.4",
+    "read-file-relative": "^1.2.0",
+    "testcafe": "^0.2.0-alpha"
+  },
+  "dependencies": {
+    "reportportal-client": "^5.1.0"
+  }
+}
