@@ -1,5 +1,5 @@
-const conf = require('../../../tconf');
-const baseUrl = conf.url + '/api/v1';
+require('dotenv').config();
+const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
 
 const RPClient = require('reportportal-client');
 
@@ -8,10 +8,10 @@ export default class ProductReport {
     constructor() {
         this.launchName = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
         this.rpClient = new RPClient({
-            token : conf.token,
+            token : process.env.REPORT_PORTAL_TOKEN,
             endpoint : baseUrl,
             launch : this.launchName,
-            project : conf.projectName
+            project : process.env.REPORT_PORTAL_PROJECT_NAME
         });
 
         this.rpClient.checkConnect().then((response) => {
@@ -28,8 +28,6 @@ export default class ProductReport {
             name: this.launchName,
             start_time: this.rpClient.helpers.now()
         });
-
-        console.log(launchObj.tempId);
 
         return launchObj.tempId;
     }
@@ -51,8 +49,6 @@ export default class ProductReport {
             tags: ['step_tag', 'step_tag2', 'step_tag3'],
             type: 'STEP'
         }, launchId, fixtureId);
-
-        console.log(stepObj);
 
         this.rpClient.finishTestItem(stepObj.tempId, {
             status: status

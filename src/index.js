@@ -21,7 +21,7 @@ export default function () {
             this.fixtureId = this.productReport.captureFixtureItem(this.launchId, this.currentFixtureName);
         },
         
-        reportTestDone (name, testRunInfo, meta) {
+        reportTestDone (name, testRunInfo) {
             const hasErr = !!testRunInfo.errs.length;
             const result = testRunInfo.skipped ? 'skipped' : hasErr ? 'passed' : 'failed';
         
@@ -34,9 +34,6 @@ export default function () {
         
             if (testRunInfo.screenshotPath)
                 title += ` (screenshots: ${testRunInfo.screenshotPath})`;
-        
-            if (meta.severity)
-                title += ' (meta.severity)';
         
             this.write(title)
                 .newline();

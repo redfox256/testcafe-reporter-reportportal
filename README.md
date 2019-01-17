@@ -18,7 +18,16 @@ npm install testcafe-reporter-reportportal
 When you run tests from the command line, specify the reporter name by using the `--reporter` option:
 
 ```
-testcafe chrome 'path/to/test/file.js' --reporter report-portal
+testcafe chrome 'path/to/test/file.js' --reporter reportportal
+```
+
+- cd into your project.
+- Edit or create the .env file by adding the following ki-reporter required variables:
+
+```
+REPORT_PORTAL_BASE_URL=http://example.com
+REPORT_PORTAL_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+REPORT_PORTAL_PROJECT_NAME=My_Demo
 ```
 
 
