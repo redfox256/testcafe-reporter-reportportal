@@ -1,10 +1,10 @@
 Running tests in: Chrome 41.0.2227 / Mac OS X 10.10.1,Firefox 47 / Mac OS X 10.10.1
 
-failed First fixture - First test in first fixture
-passed First fixture - Second test in first fixture
-failed First fixture - Third test in first fixture
-failed Second fixture - First test in second fixture
-failed Second fixture - Second test in second fixture
-failed Second fixture - Third test in second fixture
-passed Third fixture - First test in third fixture
+passed First fixture - First test in first fixture
+failed First fixture - Second test in first fixture
+passed First fixture - Third test in first fixture
+passed Second fixture - First test in second fixture
+passed Second fixture - Second test in second fixture
+passed Second fixture - Third test in second fixture
+failed Third fixture - First test in third fixture
 2/6 failed (Duration: 15m 25s)
