@@ -22,7 +22,7 @@ testcafe chrome 'path/to/test/file.js' --reporter reportportal
 ```
 
 - cd into your project.
-- Edit or create the .env file by adding the following ki-reporter required variables:
+- Edit or create the .env file by adding the following required variables:
 
 ```
 REPORT_PORTAL_BASE_URL=http://example.com

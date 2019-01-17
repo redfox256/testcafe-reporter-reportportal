@@ -18,10 +18,10 @@ export default class ProductReport {
         });
 
         this.rpClient.checkConnect().then((response) => {
-            console.log('You have successfully connected to the server.');
-            console.log(`You are using an account: ${response.full_name}`);
+            // console.log('You have successfully connected to the server.');
+            // console.log(`You are using an account: ${response.full_name}`);
         }, (error) => {
-            console.log('Error connection to server');
+            console.log('Error connecting to ReportPortal, confirm that your details are correct.');
             console.dir(error);
         });
     }
@@ -61,7 +61,6 @@ export default class ProductReport {
 
     finishFixture() {
         for (const fixtureId of this.fixtureList) {
-            console.log(fixtureId);
             this.rpClient.finishTestItem(fixtureId, {
                 end_time: this.rpClient.helpers.now()
             });

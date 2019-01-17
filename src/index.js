@@ -23,6 +23,7 @@ export default function () {
         
         reportTestDone (name, testRunInfo) {
             const hasErr = !!testRunInfo.errs.length;
+            console.log('hasErr -> ', hasErr);
             const result = testRunInfo.skipped ? 'skipped' : hasErr ? 'passed' : 'failed';
         
             const fixtureName = `${this.currentFixtureName} - ${name}`;
