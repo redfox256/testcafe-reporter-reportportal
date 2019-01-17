@@ -27,13 +27,7 @@ export default function () {
         
             const fixtureName = `${this.currentFixtureName} - ${name}`;
         
-            let title = `${result} ${fixtureName}`;
-        
-            if (testRunInfo.unstable)
-                title += ' (unstable)';
-        
-            if (testRunInfo.screenshotPath)
-                title += ` (screenshots: ${testRunInfo.screenshotPath})`;
+            const title = `${result} ${fixtureName}`;
         
             this.write(title)
                 .newline();

@@ -6,7 +6,10 @@ const RPClient = require('reportportal-client');
 export default class ProductReport {
 
     constructor() {
-        this.launchName = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+        this.date = new Date();
+        this.launchName = this.date.toLocaleDateString() + ' ' + this.date.toLocaleTimeString();
+        this.fixtureList = [];
+
         this.rpClient = new RPClient({
             token : process.env.REPORT_PORTAL_TOKEN,
             endpoint : baseUrl,
@@ -39,6 +42,7 @@ export default class ProductReport {
             type: 'SUITE'
         }, launchId);
 
+        this.fixtureList.push(suiteObj.tempId);
         return suiteObj.tempId;
     }
 
@@ -46,16 +50,26 @@ export default class ProductReport {
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
             start_time: this.rpClient.helpers.now(),
-            tags: ['step_tag', 'step_tag2', 'step_tag3'],
             type: 'STEP'
         }, launchId, fixtureId);
 
         this.rpClient.finishTestItem(stepObj.tempId, {
+            end_time: this.rpClient.helpers.now(),
             status: status
         });
     }
 
+    finishFixture() {
+        for (const fixtureId of this.fixtureList) {
+            console.log(fixtureId);
+            this.rpClient.finishTestItem(fixtureId, {
+                end_time: this.rpClient.helpers.now()
+            });
+        }
+    }
+
     finishLaunch(launchId) {
+        this.finishFixture();
         this.rpClient.finishLaunch(launchId, {
             end_time: this.rpClient.helpers.now()
         });
