@@ -6,15 +6,16 @@ const RPClient = require('reportportal-client');
 export default class ProductReport {
 
     constructor() {
+        this.projectName = process.env.REPORT_PORTAL_PROJECT_NAME;
         this.date = new Date();
-        this.launchName = this.date.toLocaleDateString() + ' ' + this.date.toLocaleTimeString();
+        this.launchName = `${this.projectName} [${this.date.toLocaleDateString()} ${this.date.toLocaleTimeString()}]`;
         this.fixtureList = [];
 
         this.rpClient = new RPClient({
             token : process.env.REPORT_PORTAL_TOKEN,
             endpoint : baseUrl,
             launch : this.launchName,
-            project : process.env.REPORT_PORTAL_PROJECT_NAME
+            project : this.projectName
         });
 
         this.rpClient.checkConnect().then((response) => {

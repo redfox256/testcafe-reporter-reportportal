@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const ProductReport = require('./productreport');
 
 export default function () {
@@ -10,7 +9,6 @@ export default function () {
             this.testCount = testCount;
         
             this.write(`Running tests in: ${userAgents}`)
-                .newline()
                 .newline();
                 
             this.productReport = new ProductReport();
@@ -18,19 +16,22 @@ export default function () {
         },
         
         reportFixtureStart (name) {
-            this.currentFixtureName = name;
-            this.fixtureId = this.productReport.captureFixtureItem(this.launchId, this.currentFixtureName);
+            this.fixtureId = this.productReport.captureFixtureItem(this.launchId, this.name);
+
+            this.newline()
+                .setIndent(0)
+                .write(`[${this.chalk.blue(name)}]`)
+                .newline();
         },
         
         reportTestDone (name, testRunInfo) {
             const hasErr = !!testRunInfo.errs.length;
             const result = testRunInfo.skipped ? 'skipped' : hasErr ? 'failed' : 'passed';
         
-            const fixtureName = `${this.currentFixtureName} - ${name}`;
+            const title = `[ ${result === 'passed' ? this.chalk.green.bold('✓') : this.chalk.red.bold('✖')} ] ${name}`;
         
-            const title = `[ ${result === 'passed' ? chalk.green.bold('✓') : chalk.red.bold('✖')} ] ${fixtureName}`;
-        
-            this.write(title)
+            this.setIndent(2)
+                .write(`${title} ${testRunInfo.screenshotPath}`)
                 .newline();
 
             this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result);
@@ -49,6 +50,7 @@ export default function () {
             footer += ` (Duration: ${durationStr})`;
         
             this.newline()
+                .setIndent(0)
                 .write(footer)
                 .newline();
 
