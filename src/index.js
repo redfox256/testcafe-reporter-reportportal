@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const ProductReport = require('./productreport');
 
 export default function () {
@@ -27,7 +28,7 @@ export default function () {
         
             const fixtureName = `${this.currentFixtureName} - ${name}`;
         
-            const title = `${result} ${fixtureName}`;
+            const title = `[ ${result === 'passed' ? chalk.green.bold('✓') : chalk.red.bold('✖')} ] ${fixtureName}`;
         
             this.write(title)
                 .newline();
@@ -47,7 +48,8 @@ export default function () {
         
             footer += ` (Duration: ${durationStr})`;
         
-            this.write(footer)
+            this.newline()
+                .write(footer)
                 .newline();
 
             this.productReport.finishLaunch(this.launchId);

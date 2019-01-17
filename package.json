@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-reportportal",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "TestCafe reporter plugin for reportportal.io",
   "repository": "https://github.com/redfox256/testcafe-reporter-reportportal",
   "author": {
@@ -36,6 +36,7 @@
     "testcafe": "^0.2.0-alpha"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "dotenv": "^6.2.0",
     "envs": "^0.1.6",
     "reportportal-client": "^5.1.0"
