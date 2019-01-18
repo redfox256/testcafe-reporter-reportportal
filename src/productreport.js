@@ -49,9 +49,14 @@ export default class ProductReport {
     }
 
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
+
+        console.log('start -> ', this.rpClient.helpers.now() - testRunInfo.durationMs);
+        console.log('end -> ', this.rpClient.helpers.now());
+
+
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
-            start_time: this.rpClient.helpers.now(),
+            start_time: this.rpClient.helpers.now() - testRunInfo.durationMs,
             type: 'STEP'
         }, launchId, fixtureId);
 
