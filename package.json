@@ -1,6 +1,6 @@
 {
   "name": "testcafe-reporter-reportportal",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "TestCafe reporter plugin for reportportal.io",
   "repository": "https://github.com/redfox256/testcafe-reporter-reportportal",
   "author": {
