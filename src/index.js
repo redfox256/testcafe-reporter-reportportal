@@ -34,7 +34,7 @@ export default function () {
                 .write(`${title} ${testRunInfo.screenshotPath}`)
                 .newline();
 
-            this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result);
+            this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo);
         },
         
         reportTaskDone (endTime, passed) {

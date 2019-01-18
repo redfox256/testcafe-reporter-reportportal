@@ -47,12 +47,34 @@ export default class ProductReport {
         return suiteObj.tempId;
     }
 
-    captureTestItem(launchId, fixtureId, stepName, status) {
+    captureTestItem(launchId, fixtureId, stepName, status, testRunInfo) {
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
             start_time: this.rpClient.helpers.now(),
             type: 'STEP'
         }, launchId, fixtureId);
+
+        if (testRunInfo.errs) {
+            for (const errString of errs) {
+                this.rpClient.sendLog(stepObj.tempId, {
+                    status: "error",
+                    message: errString,
+                    time: rpClient.helpers.now()
+                })
+            }
+        }
+
+        if (testRunInfo.screenshots) {
+            for (const screenshots of screenshots) {
+                console.log('screenshotPath -> ', screenshots.screenshotPath);
+
+                // this.rpClient.sendLog(stepObj.tempId, {
+                //     name: `${stepName}.png`,
+                //     type: 'image/png',
+                //     content: rpClient.helpers.now()
+                // })
+            }
+        }
 
         this.rpClient.finishTestItem(stepObj.tempId, {
             end_time: this.rpClient.helpers.now(),
