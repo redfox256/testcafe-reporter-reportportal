@@ -80,12 +80,12 @@ export default class ProductReport {
                 console.log('screenshotPath -> ', screenshots.screenshotPath);
 
                 const screenshotContent = fs.readFileSync(screenshots.screenshotPath);
+                const screenshotObj = {};
+                screenshotObj.name = `${stepName}.png`
+                screenshotObj.type = 'image/png'
+                screenshotObj.content = screenshotContent;
 
-                this.rpClient.sendLog(stepObj.tempId, {
-                    name: `${stepName}.png`,
-                    type: 'image/png',
-                    content: screenshotContent
-                });
+                this.rpClient.sendLog(stepObj.tempId, screenshotObj);
             }
         }
 
