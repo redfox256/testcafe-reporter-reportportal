@@ -55,24 +55,24 @@ export default class ProductReport {
         }, launchId, fixtureId);
 
         if (testRunInfo.errs) {
-            for (const errString of errs) {
+            for (const errString of testRunInfo.errs) {
                 this.rpClient.sendLog(stepObj.tempId, {
-                    status: "error",
+                    status: 'error',
                     message: errString,
-                    time: rpClient.helpers.now()
-                })
+                    time: this.rpClient.helpers.now()
+                });
             }
         }
 
         if (testRunInfo.screenshots) {
-            for (const screenshots of screenshots) {
+            for (const screenshots of testRunInfo.screenshots) {
                 console.log('screenshotPath -> ', screenshots.screenshotPath);
 
                 // this.rpClient.sendLog(stepObj.tempId, {
                 //     name: `${stepName}.png`,
                 //     type: 'image/png',
                 //     content: rpClient.helpers.now()
-                // })
+                // });
             }
         }
 
