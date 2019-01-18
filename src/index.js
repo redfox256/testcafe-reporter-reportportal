@@ -16,7 +16,7 @@ export default function () {
         },
         
         reportFixtureStart (name) {
-            this.fixtureId = this.productReport.captureFixtureItem(this.launchId, this.name);
+            this.fixtureId = this.productReport.captureFixtureItem(this.launchId, name);
 
             this.newline()
                 .setIndent(0)
