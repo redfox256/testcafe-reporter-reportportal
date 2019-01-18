@@ -51,7 +51,7 @@
     "key-spacing": [0, { "align": "value" }],
     "max-nested-callbacks": [2, 3],
     "new-parens": 2,
-    "newline-after-var": [2, "always"],
+    "newline-after-var": [0, "always"],
     "no-lonely-if": 2,
     "no-multiple-empty-lines":  [2, { "max": 2 }],
     "no-nested-ternary": 0,
