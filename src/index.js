@@ -31,7 +31,7 @@ export default function () {
             const title = `[ ${result === 'passed' ? this.chalk.green.bold('✓') : this.chalk.red.bold('✖')} ] ${name}`;
         
             this.setIndent(2)
-                .write(`${title} ${testRunInfo.screenshotPath}`)
+                .write(`${title}`)
                 .newline();
 
             this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo);

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
 
 const RPClient = require('reportportal-client');
@@ -56,11 +57,13 @@ export default class ProductReport {
 
         if (testRunInfo.errs) {
             for (const errString of testRunInfo.errs) {
-                this.rpClient.sendLog(stepObj.tempId, {
-                    status: 'error',
-                    message: errString,
-                    time: this.rpClient.helpers.now()
-                });
+                if (errString.errMsg) {
+                    this.rpClient.sendLog(stepObj.tempId, {
+                        status: 'error',
+                        message: errString.errMsg,
+                        time: this.rpClient.helpers.now()
+                    });
+                }
             }
         }
 
@@ -68,11 +71,13 @@ export default class ProductReport {
             for (const screenshots of testRunInfo.screenshots) {
                 console.log('screenshotPath -> ', screenshots.screenshotPath);
 
-                // this.rpClient.sendLog(stepObj.tempId, {
-                //     name: `${stepName}.png`,
-                //     type: 'image/png',
-                //     content: rpClient.helpers.now()
-                // });
+                const screenshotContent = fs.readFileSync(screenshots.screenshotPath);
+
+                this.rpClient.sendLog(stepObj.tempId, {
+                    name: `${stepName}.png`,
+                    type: 'image/png',
+                    content: screenshotContent
+                });
             }
         }
 
