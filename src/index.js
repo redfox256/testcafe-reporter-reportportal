@@ -25,6 +25,7 @@ export default function () {
         },
         
         reportTestDone (name, testRunInfo) {
+            const self = this;
             const hasErr = !!testRunInfo.errs.length;
             const result = testRunInfo.skipped ? 'skipped' : hasErr ? 'failed' : 'passed';
         
@@ -34,7 +35,7 @@ export default function () {
                 .write(`${title}`)
                 .newline();
 
-            this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo);
+            this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo, self);
         },
         
         reportTaskDone (endTime, passed) {

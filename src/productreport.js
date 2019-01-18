@@ -48,7 +48,7 @@ export default class ProductReport {
         return suiteObj.tempId;
     }
 
-    captureTestItem(launchId, fixtureId, stepName, status, testRunInfo) {
+    captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
             start_time: this.rpClient.helpers.now(),
@@ -56,15 +56,18 @@ export default class ProductReport {
         }, launchId, fixtureId);
 
         if (testRunInfo.errs) {
-            for (const errString of testRunInfo.errs) {
-                if (errString.errMsg) {
+            testRunInfo.errs.forEach((err, idx) => {
+                err = parentSelf.formatError(err, `${idx + 1}) `);
+
+                if (err) {
                     this.rpClient.sendLog(stepObj.tempId, {
                         status: 'error',
-                        message: errString.errMsg,
+                        message: err,
                         time: this.rpClient.helpers.now()
                     });
                 }
-            }
+                
+            });
         }
 
         if (testRunInfo.screenshots) {
