@@ -49,44 +49,43 @@ export default class ProductReport {
     }
 
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
-
-        console.log('start -> ', this.rpClient.helpers.now() - testRunInfo.durationMs);
-        console.log('end -> ', this.rpClient.helpers.now());
-
-
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
             start_time: this.rpClient.helpers.now() - testRunInfo.durationMs,
             type: 'STEP'
         }, launchId, fixtureId);
 
-        if (testRunInfo.errs) {
-            testRunInfo.errs.forEach((err, idx) => {
-                err = parentSelf.formatError(err, `${idx + 1}) `);
-
-                if (err) {
-                    this.rpClient.sendLog(stepObj.tempId, {
-                        status: 'error',
-                        message: err,
-                        time: this.rpClient.helpers.now()
-                    });
-                }
-                
-            });
-        }
-
         if (testRunInfo.screenshots) {
             for (const screenshots of testRunInfo.screenshots) {
                 console.log('screenshotPath -> ', screenshots.screenshotPath);
 
                 const screenshotContent = fs.readFileSync(screenshots.screenshotPath);
-                const screenshotObj = {};
-                screenshotObj.name = `${stepName}.png`;
-                screenshotObj.type = 'image/png';
-                screenshotObj.content = screenshotContent;
 
-                this.rpClient.sendLog(stepObj.tempId, screenshotObj);
+                this.rpClient.sendLog(stepObj.tempId, 
+                    {
+                        status: 'error',
+                        message: 'Error Screenshot',
+                        time: this.rpClient.helpers.now()
+                    },
+                    {
+                        name: `${stepName}.png`,
+                        type: 'image/png',
+                        content: screenshotContent
+                    }
+                );
             }
+        }
+
+        if (testRunInfo.errs) {
+            testRunInfo.errs.forEach((err, idx) => {
+                err = parentSelf.formatError(err);
+
+                this.rpClient.sendLog(stepObj.tempId, {
+                    status: 'error',
+                    message: err,
+                    time: this.rpClient.helpers.now()
+                });
+            });
         }
 
         this.rpClient.finishTestItem(stepObj.tempId, {
