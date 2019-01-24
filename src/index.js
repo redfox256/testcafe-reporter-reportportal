@@ -35,6 +35,13 @@ export default function () {
                 .write(`${title}`)
                 .newline();
 
+            if (hasErr) {
+                testRunInfo.errs.forEach((err, idx) => {
+                    this.newline()
+                        .write(this.formatError(err, `${idx + 1}) `));
+                });
+            }
+
             this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo, self);
         },
         

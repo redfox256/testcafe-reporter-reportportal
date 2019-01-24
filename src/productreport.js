@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+const stripAnsi = require('strip-ansi');
 const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
 
 const RPClient = require('reportportal-client');
@@ -82,7 +83,7 @@ export default class ProductReport {
 
                 this.rpClient.sendLog(stepObj.tempId, {
                     status: 'error',
-                    message: err,
+                    message: stripAnsi(err),
                     time: this.rpClient.helpers.now()
                 });
             });
