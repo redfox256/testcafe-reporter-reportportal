@@ -9,8 +9,7 @@ export default class ProductReport {
 
     constructor() {
         this.projectName = process.env.REPORT_PORTAL_PROJECT_NAME;
-        this.date = new Date();
-        this.launchName = `${this.projectName} [${this.date.toLocaleDateString()} ${this.date.toLocaleTimeString()}]`;
+        this.launchName = `${this.projectName}`;
         this.fixtureList = [];
 
         this.rpClient = new RPClient({
@@ -96,11 +95,11 @@ export default class ProductReport {
     }
 
     finishFixture() {
-        for (const fixtureId of this.fixtureList) {
+        this.fixtureList.forEach((fixtureId, idx) => {
             this.rpClient.finishTestItem(fixtureId, {
                 end_time: this.rpClient.helpers.now()
             });
-        }
+        });
     }
 
     finishLaunch(launchId) {
