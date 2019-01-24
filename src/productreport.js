@@ -57,10 +57,10 @@ export default class ProductReport {
         }, launchId, fixtureId);
 
         if (testRunInfo.screenshots) {
-            for (const screenshots of testRunInfo.screenshots) {
-                console.log('screenshotPath -> ', screenshots.screenshotPath);
+            testRunInfo.screenshots.forEach((screenshot, idx) => {
+                // console.log('screenshotPath -> ', screenshot.screenshotPath);
 
-                const screenshotContent = fs.readFileSync(screenshots.screenshotPath);
+                const screenshotContent = fs.readFileSync(screenshot.screenshotPath);
 
                 this.rpClient.sendLog(stepObj.tempId, 
                     {
@@ -74,7 +74,7 @@ export default class ProductReport {
                         content: screenshotContent
                     }
                 );
-            }
+            });
         }
 
         if (testRunInfo.errs) {

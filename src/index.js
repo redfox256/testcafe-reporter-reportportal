@@ -38,7 +38,8 @@ export default function () {
             if (hasErr) {
                 testRunInfo.errs.forEach((err, idx) => {
                     this.newline()
-                        .write(this.formatError(err, `${idx + 1}) `));
+                        .write(this.formatError(err, `${idx + 1}) `))
+                        .newline();
                 });
             }
 
