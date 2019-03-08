@@ -28,6 +28,8 @@ testcafe chrome 'path/to/test/file.js' --reporter reportportal
 REPORT_PORTAL_BASE_URL=http://example.com
 REPORT_PORTAL_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 REPORT_PORTAL_PROJECT_NAME=My_Demo
+# Launch name is optional, if not specified the name will default to the project name
+REPORT_PORTAL_LAUNCH_NAME=The Launch Name
 ```
 
 

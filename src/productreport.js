@@ -1,15 +1,15 @@
 require('dotenv').config();
 const fs = require('fs');
 const stripAnsi = require('strip-ansi');
-const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
-
 const RPClient = require('reportportal-client');
+
+const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
 
 export default class ProductReport {
 
     constructor() {
         this.projectName = process.env.REPORT_PORTAL_PROJECT_NAME;
-        this.launchName = `${this.projectName}`;
+        this.launchName = process.env.REPORT_PORTAL_LAUNCH_NAME || this.projectName;
         this.fixtureList = [];
 
         this.rpClient = new RPClient({
