@@ -30,7 +30,7 @@ export default class ProductReport {
 
     startLaunch() {
         const launchObj = this.rpClient.startLaunch({
-            name: this.launchName,
+            name: this.launchName
         });
 
         return launchObj.tempId;
