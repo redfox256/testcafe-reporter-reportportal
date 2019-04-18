@@ -31,7 +31,6 @@ export default class ProductReport {
     startLaunch() {
         const launchObj = this.rpClient.startLaunch({
             name: this.launchName,
-            start_time: this.rpClient.helpers.now()
         });
 
         return launchObj.tempId;
@@ -40,7 +39,6 @@ export default class ProductReport {
     captureFixtureItem(launchId, fixtureName) {
         const suiteObj = this.rpClient.startTestItem({
             name: fixtureName,
-            start_time: this.rpClient.helpers.now(),
             type: 'SUITE'
         }, launchId);
 
@@ -51,7 +49,6 @@ export default class ProductReport {
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
-            start_time: this.rpClient.helpers.now() - testRunInfo.durationMs,
             type: 'STEP'
         }, launchId, fixtureId);
 
@@ -89,7 +86,6 @@ export default class ProductReport {
         }
 
         this.rpClient.finishTestItem(stepObj.tempId, {
-            end_time: this.rpClient.helpers.now(),
             status: status
         });
     }
@@ -104,9 +100,7 @@ export default class ProductReport {
 
     finishLaunch(launchId) {
         this.finishFixture();
-        this.rpClient.finishLaunch(launchId, {
-            end_time: this.rpClient.helpers.now()
-        });
+        this.rpClient.finishLaunch(launchId);
     }
 
 }
