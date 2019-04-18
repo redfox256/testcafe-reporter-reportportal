@@ -47,7 +47,7 @@ export default class ProductReport {
     }
 
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
-        var start_time = _this.rpClient.helpers.now();
+        var start_time = this.rpClient.helpers.now();
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
             start_time: start_time,
