@@ -47,8 +47,10 @@ export default class ProductReport {
     }
 
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
+        var start_time = _this.rpClient.helpers.now();
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
+            start_time: start_time,
             type: 'STEP'
         }, launchId, fixtureId);
 
@@ -62,7 +64,7 @@ export default class ProductReport {
                     {
                         status: 'error',
                         message: 'Error Screenshot',
-                        time: this.rpClient.helpers.now()
+                        time: start_time
                     },
                     {
                         name: `${stepName}.png`,
@@ -80,13 +82,14 @@ export default class ProductReport {
                 this.rpClient.sendLog(stepObj.tempId, {
                     status: 'error',
                     message: stripAnsi(err),
-                    time: this.rpClient.helpers.now()
+                    time: start_time
                 });
             });
         }
 
         this.rpClient.finishTestItem(stepObj.tempId, {
-            status: status
+            status: status,
+            end_time: start_time + testRunInfo.durationMs
         });
     }
 
