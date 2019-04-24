@@ -103,7 +103,9 @@ export default class ProductReport {
 
     finishLaunch(launchId) {
         this.finishFixture();
-        this.rpClient.finishLaunch(launchId);
+        this.rpClient.finishLaunch(launchId, {
+            end_time: this.rpClient.helpers.now()
+        });
     }
 
 }
