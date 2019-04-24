@@ -1,7 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const stripAnsi = require('strip-ansi');
-const RPClient = require('reportportal-client');
+const RPClient = require('reportportal-js-client');
 
 const baseUrl = process.env.REPORT_PORTAL_BASE_URL + '/api/v1';
 
