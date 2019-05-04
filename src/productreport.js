@@ -10,8 +10,8 @@ export default class ProductReport {
     constructor() {
         this.projectName = process.env.REPORT_PORTAL_PROJECT_NAME;
         this.launchName = process.env.REPORT_PORTAL_LAUNCH_NAME || this.projectName;
-        this.description = process.env.REPORT_PORTAL_DESCRIPTION === undefined ? undefined : process.env.REPORT_PORTAL_DESCRIPTION;
-        this.tagsList = process.env.REPORT_PORTAL_TAGS === undefined ? undefined : process.env.REPORT_PORTAL_TAGS.split(',');
+        this.description = typeof process.env.REPORT_PORTAL_DESCRIPTION === "undefined" ? void 0 : process.env.REPORT_PORTAL_DESCRIPTION;
+        this.tagsList = typeof process.env.REPORT_PORTAL_TAGS === "undefined" ? void 0 : process.env.REPORT_PORTAL_TAGS.split(',');
         this.fixtureList = [];
 
         this.rpClient = new RPClient({
