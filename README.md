@@ -30,6 +30,10 @@ REPORT_PORTAL_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 REPORT_PORTAL_PROJECT_NAME=My_Demo
 # Launch name is optional, if not specified the name will default to the project name
 REPORT_PORTAL_LAUNCH_NAME=The Launch Name
+# Tags are optional, should be separated by coma
+REPORT_PORTAL_TAGS=Tag1, Tag2
+# Description is optional
+REPORT_PORTAL_DESCRIPTION=Run description
 ```
 
 
