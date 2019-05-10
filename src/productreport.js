@@ -90,11 +90,9 @@ export default class ProductReport {
         var testResult = {
             status: status,
             end_time: start_time + testRunInfo.durationMs
-        }
+        };
 
-        if (status === 'skipped') {
-            testResult.issue = { issue_type: 'NOT_ISSUE' }
-        }
+        if (status === 'skipped') testResult.issue = { issue_type: 'NOT_ISSUE' };
 
         this.rpClient.finishTestItem(stepObj.tempId, testResult);
     }
