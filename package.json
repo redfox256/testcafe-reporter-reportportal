@@ -1,7 +1,7 @@
 {
   "name": "testcafe-reporter-reportportal",
   "version": "1.0.22",
-  "description": "TestCafe reporter plugin for reportportal.io",
+ "TestCafe reporter plugin for reportportal.io",
   "repository": "https://github.com/redfox256/testcafe-reporter-reportportal",
   "author": {
     "name": "Darryn",
