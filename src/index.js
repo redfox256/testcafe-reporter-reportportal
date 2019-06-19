@@ -29,7 +29,7 @@ export default function () {
             const hasErr = !!testRunInfo.errs.length;
             const result = testRunInfo.skipped ? 'skipped' : hasErr ? 'failed' : 'passed';
         
-            const title = `[ ${result === 'passed' ? this.chalk.green.bold('✓') : this.chalk.red.bold('✖')} ] ${name}`;
+            const title = `[ ${result === 'passed' ? this.chalk.green.bold('✓') : result === 'skipped' ? this.chalk.blue.bold('-') : this.chalk.red.bold('✖')} ] ${name}`;
         
             this.setIndent(2)
                 .write(`${title}`)
