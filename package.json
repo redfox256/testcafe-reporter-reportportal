@@ -38,7 +38,7 @@
   "dependencies": {
     "dotenv": "^6.2.0",
     "envs": "^0.1.6",
-    "reportportal-js-client": "^1.0.1",
+    "reportportal-js-client": "^1.0.2",
     "strip-ansi": "^5.0.0"
   }
 }
