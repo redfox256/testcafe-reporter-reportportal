@@ -36,6 +36,7 @@ REPORT_PORTAL_TAGS=Tag1, Tag2
 REPORT_PORTAL_DESCRIPTION=Run description
 ```
 
+
 When you use API, pass the reporter name to the `reporter()` method:
 
 ```js
