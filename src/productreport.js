@@ -27,7 +27,7 @@ export default class ProductReport {
             // console.log('You have successfully connected to the server.');
             // console.log(`You are using an account: ${response.full_name}`);
         }, (error) => {
-            console.log('Error connecting to ReportPortal, confirm that your details are correct.');
+            console.warn('Error connecting to ReportPortal, confirm that your details are correct.');
             console.dir(error);
             this.connected = false;
         });
