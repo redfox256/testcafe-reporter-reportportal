@@ -13,6 +13,7 @@ export default class ProductReport {
         this.description = typeof process.env.REPORT_PORTAL_DESCRIPTION === 'undefined' ? void 0 : process.env.REPORT_PORTAL_DESCRIPTION;
         this.tagsList = typeof process.env.REPORT_PORTAL_TAGS === 'undefined' ? void 0 : process.env.REPORT_PORTAL_TAGS.split(',');
         this.fixtureList = [];
+        this.connected = true;
 
         this.rpClient = new RPClient({
             token : process.env.REPORT_PORTAL_TOKEN,
@@ -22,15 +23,18 @@ export default class ProductReport {
         });
 
         this.rpClient.checkConnect().then((response) => {
+            this.connected = true;
             // console.log('You have successfully connected to the server.');
             // console.log(`You are using an account: ${response.full_name}`);
         }, (error) => {
-            console.log('Error connecting to ReportPortal, confirm that your details are correct.');
+            console.warn('Error connecting to ReportPortal, confirm that your details are correct.');
             console.dir(error);
+            this.connected = false;
         });
     }
 
     startLaunch() {
+        if (!this.connected) return 'Unknown Launch ID';
         const launchObj = this.rpClient.startLaunch({
             name: this.launchName,
             description: this.description,
@@ -41,6 +45,7 @@ export default class ProductReport {
     }
 
     captureFixtureItem(launchId, fixtureName) {
+        if (!this.connected) return 'Unknown Test ID';
         const suiteObj = this.rpClient.startTestItem({
             name: fixtureName,
             type: 'SUITE'
@@ -51,6 +56,8 @@ export default class ProductReport {
     }
 
     captureTestItem(launchId, fixtureId, stepName, status, testRunInfo, parentSelf) {
+        if (!this.connected) return;
+
         var start_time = this.rpClient.helpers.now();
         const stepObj = this.rpClient.startTestItem({
             name: stepName,
@@ -102,6 +109,7 @@ export default class ProductReport {
     }
 
     finishFixture() {
+        if (!this.connected) return;     
         this.fixtureList.forEach((fixtureId, idx) => {
             this.rpClient.finishTestItem(fixtureId, {
                 end_time: this.rpClient.helpers.now()
@@ -110,6 +118,7 @@ export default class ProductReport {
     }
 
     finishLaunch(launchId) {
+        if (!this.connected) return;
         this.finishFixture();
         this.rpClient.finishLaunch(launchId, {
             end_time: this.rpClient.helpers.now()
