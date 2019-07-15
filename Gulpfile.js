@@ -23,7 +23,7 @@ gulp.task('lint', function () {
 gulp.task('build', ['clean', 'lint'], function () {
     return gulp
         .src('src/**/*.js')
-        .pipe(babel())
+        .pipe(babel( { optional: ['runtime'] } ))
         .pipe(gulp.dest('lib'));
 });
 
