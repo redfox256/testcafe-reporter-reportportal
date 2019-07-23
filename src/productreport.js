@@ -108,19 +108,19 @@ export default class ProductReport {
         this.rpClient.finishTestItem(stepObj.tempId, testResult);
     }
 
-    finishFixture() {
+    async finishFixture() {
         if (!this.connected) return;     
-        this.fixtureList.forEach((fixtureId, idx) => {
-            this.rpClient.finishTestItem(fixtureId, {
+        this.fixtureList.forEach(async (fixtureId, idx) => {
+            await this.rpClient.finishTestItem(fixtureId, {
                 end_time: this.rpClient.helpers.now()
             });
         });
     }
 
-    finishLaunch(launchId) {
+    async finishLaunch(launchId) {
         if (!this.connected) return;
-        this.finishFixture();
-        this.rpClient.finishLaunch(launchId, {
+        await this.finishFixture();
+        await this.rpClient.finishLaunch(launchId, {
             end_time: this.rpClient.helpers.now()
         });
     }

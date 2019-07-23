@@ -1,3 +1,4 @@
+const regeneratorRuntime = require('babel-runtime/regenerator');
 const ProductReport = require('./productreport');
 
 export default function () {
@@ -46,7 +47,7 @@ export default function () {
             this.productReport.captureTestItem(this.launchId, this.fixtureId, name, result, testRunInfo, self);
         },
         
-        reportTaskDone (endTime, passed) {
+        async reportTaskDone (endTime, passed) {
             const durationMs  = endTime - this.startTime;
             const durationStr = this.moment
                                     .duration(durationMs)
@@ -63,7 +64,7 @@ export default function () {
                 .write(footer)
                 .newline();
 
-            this.productReport.finishLaunch(this.launchId);
+            await this.productReport.finishLaunch(this.launchId);
         }
     };
 }
