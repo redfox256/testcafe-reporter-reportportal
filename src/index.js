@@ -1,4 +1,3 @@
-const regeneratorRuntime = require('babel-runtime/regenerator');
 const ProductReport = require('./productreport');
 
 export default function () {
