@@ -71,7 +71,7 @@ export default class ProductReport {
 
                 const screenshotContent = fs.readFileSync(screenshot.screenshotPath);
 
-                this.rpClient.sendLog(stepObj.tempId, 
+                this.rpClient.sendLog(stepObj.tempId,
                     {
                         status: 'error',
                         message: 'Error Screenshot',
@@ -109,7 +109,7 @@ export default class ProductReport {
     }
 
     async finishFixture() {
-        if (!this.connected) return;     
+        if (!this.connected) return;
         this.fixtureList.forEach(async (fixtureId, idx) => {
             await this.rpClient.finishTestItem(fixtureId, {
                 end_time: this.rpClient.helpers.now()
@@ -120,8 +120,10 @@ export default class ProductReport {
     async finishLaunch(launchId) {
         if (!this.connected) return;
         await this.finishFixture();
-        await this.rpClient.finishLaunch(launchId, {
+        await (this.rpClient.finishLaunch(launchId, {
             end_time: this.rpClient.helpers.now()
+        })).promise.then((val) => {
+            console.log('Report Portal launch: ' + val.link);
         });
     }
 
