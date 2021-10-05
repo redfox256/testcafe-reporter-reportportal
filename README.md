@@ -34,6 +34,8 @@ REPORT_PORTAL_LAUNCH_NAME=The Launch Name
 REPORT_PORTAL_TAGS=Tag1, Tag2
 # Description is optional
 REPORT_PORTAL_DESCRIPTION=Run description
+# Launch ID is optional, and if specified the reporter will use the specified ID for its launch, and will not stop the launch at the end of the suite
+REPORT_PORTAL_LAUNCH_ID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 ```
 
 

@@ -10,6 +10,7 @@ export default class ProductReport {
     constructor() {
         this.projectName = process.env.REPORT_PORTAL_PROJECT_NAME;
         this.launchName = process.env.REPORT_PORTAL_LAUNCH_NAME || this.projectName;
+        this.manualLaunchId = process.env.REPORT_PORTAL_LAUNCH_ID;
         this.description = typeof process.env.REPORT_PORTAL_DESCRIPTION === 'undefined' ? void 0 : process.env.REPORT_PORTAL_DESCRIPTION;
         this.tagsList = typeof process.env.REPORT_PORTAL_TAGS === 'undefined' ? void 0 : process.env.REPORT_PORTAL_TAGS.split(',');
         this.fixtureList = [];
@@ -38,7 +39,8 @@ export default class ProductReport {
         const launchObj = this.rpClient.startLaunch({
             name: this.launchName,
             description: this.description,
-            tags: this.tagsList
+            tags: this.tagsList,
+            id: this.manualLaunchId
         });
 
         return launchObj.tempId;
@@ -120,11 +122,14 @@ export default class ProductReport {
     async finishLaunch(launchId) {
         if (!this.connected) return;
         await this.finishFixture();
-        await (this.rpClient.finishLaunch(launchId, {
-            end_time: this.rpClient.helpers.now()
-        })).promise.then((val) => {
-            console.log('Report Portal launch: ' + val.link);
-        });
+        
+        if (!this.manualLaunchId) {
+            await (this.rpClient.finishLaunch(launchId, {
+                end_time: this.rpClient.helpers.now()
+            })).promise.then((val) => {
+                console.log('Report Portal launch: ' + val.link);
+            });
+        }
     }
 
 }
